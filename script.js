@@ -6,7 +6,10 @@ var cityList = ``
 function loadData(){
 
     //openWeather api key
-    var apiKey = "833eb16104bf93498588f46b928111ab"
+    var apiKeyCurrentWeather = "833eb16104bf93498588f46b928111ab"
+    var apiKeyForecast = "ab3a133ff08545c18c41d6d6bc01f775"
+                 
+
 
     //grabbing city from
     var city = $("#inputfield").val()
@@ -14,8 +17,11 @@ function loadData(){
 
 
 
-    //URL to query to
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
+    //URL to query to current weather data
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKeyCurrentWeather}&units=imperial`
+
+    //URL to query to 5 day forecast data
+    var queryURLForecast = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&appid=${apiKeyForecast}`
 
 
     $.ajax({
@@ -50,6 +56,7 @@ function loadData(){
 
 
         cityList = cityList+ " " +htmlCityList
+        
 
         var htmlData = `
 
@@ -72,10 +79,37 @@ function loadData(){
 
                 </div>
 
+                <h5 class="d-block mt-5 text-dark p-3">5-Day Forecast:</h5>
+
+                
+
         `
+
+        localStorage.setItem("htmlData",htmlData)
 
         $("#citylist").html(cityList)
         $("#secondcolumn").html(htmlData)
+
+
+    })
+
+
+
+
+    
+
+
+    //Querying 5 day forecast data using a different api
+    $.ajax({
+        url: queryURLForecast,
+        method: "GET"
+    }).then(function(response2){
+
+
+        console.log("Second response "+response2)
+
+       
+
     })
 
 
@@ -84,4 +118,12 @@ function loadData(){
 
 
 $("#searchbutton").on("click",loadData)
+
+$(document).ready(function(){
+
+    var $htmlData = localStorage.getItem("htmlData")
+
+    $("#secondcolumn").html($htmlData)
+
+})
 
