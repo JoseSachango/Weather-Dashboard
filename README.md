@@ -6,6 +6,6 @@ This weather dashboard application displays current weather data for any city th
 
 ```search tool
 
-![alt text](C:\Users\Jose Sachango\Pictures\Screenshots\searchtool.png)
+![alt text](../../../Pictures/Screenshots/searchtool.png)
 
 ```
