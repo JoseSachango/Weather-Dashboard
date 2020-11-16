@@ -42,7 +42,7 @@ function loadData(){
         var newDate = new Date(dateTime).toLocaleDateString()
         var newTime = new Date(dateTime).toLocaleTimeString()
 
-        if(currentWeather.includes("clouds")){
+        if(currentWeather.includes("cloud")){
             var $img = `<img src="https://img.icons8.com/dusk/64/000000/cloud.png"/>`
         }else{
 
@@ -113,7 +113,7 @@ function loadData(){
 
         //calling second Api with latitude and longitude values returned from first Api call
         $.ajax({
-            url: `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&appid=${apiKeyForecast}`,
+            url: `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&appid=${apiKeyForecast}&units=imperial`,
             method: "GET"
         }).then(function(response2){
 
@@ -127,23 +127,68 @@ function loadData(){
 
             $("#uvindex").append(uvIndexDiv)
 
-            //var conditionForecast1 = response2.
 
-            var foreCastCards = `
+            var forecastCardRow = ``
 
-                <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-                        
-                        <div class="card-body">
-                            <h4 class="card-title">Primary card title</h4>
-                            <img class="p-3" src="https://img.icons8.com/emoji/48/000000/sun-emoji.png"/>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            //looping through the five day forecast for all the information to put on the cards
+            for(let i=1;i<6;i++){
+
+                //defining variables for all the data that go on the card
+                var dateForecast = (response2.daily[i].dt)*1000
+                var newDateForecast = new Date(dateForecast).toLocaleDateString()
+                var weatherForecast = response2.daily[i].weather[0].description
+                var weatherForecastShort = response2.daily[i].weather[0].main
+                var humidityForecast = response2.daily[i].humidity
+                var temperatureForecast = response2.daily[i].temp.day
+
+
+                //creating a conditional statment that determines what weather icon to pick
+                if(weatherForecast.includes("cloud")){
+                    var $imgF = `<img class="p-3" src="https://img.icons8.com/dusk/48/000000/cloud.png"/>`
+
+                }
+                else if(weatherForecast.includes("sun")||weatherForecast.includes("clear")){
+                    var $imgF = `<img class="p-3" src="https://img.icons8.com/emoji/48/000000/sun-emoji.png"/>`
+
+                }
+                else if(weatherForecast.includes("partly")){
+                    var $imgF = `<img class="p-3" src="https://img.icons8.com/dusk/48/000000/apple-weather.png"/>`
+
+                }
+                else if(weatherForecast.includes("rain")){
+                    var $imgF = `<img class="p-3" src="https://img.icons8.com/cotton/48/000000/rain--v1.png"/>`
+                }
+                else{
+                    var $imgF = `<img src="https://img.icons8.com/color/48/000000/storm.png"/>`
+                }
+
+
+
+                //var conditionForecast1 = response2
+                    var foreCastCards = `
+
+                        <div class="col d-inline-block mr-4 card text-white bg-primary mb-3" style="max-width: 20rem;">
+                                
+                                <div class="card-body">
+                                    <h4 class="card-title">${newDateForecast}</h4>
+                                    ${$imgF}
+                                    <p class="card-text">Temp: ${temperatureForecast} F</p>
+                                    <p class="card-text">Humidity: ${humidityForecast} % F</p>
+                                </div>
                         </div>
-                </div>
-                
-            
-            `
 
-            $("#forecastRow").append(foreCastCards)
+                        `
+                    forecastCardRow = forecastCardRow +` `+ foreCastCards
+                    
+
+                   // $("#forecastRow").append(foreCastCards)
+
+
+
+
+            }
+
+            $("#forecastRow").append(forecastCardRow)
 
             
 
