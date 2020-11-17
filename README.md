@@ -7,5 +7,5 @@ This weather dashboard application displays current weather data for any city th
 
 
 
-![image](../../../Pictures/Screenshots/searchtool.png)
+![image](../../../Pictures/Screenshots/searchtool.png?raw=true)
 
