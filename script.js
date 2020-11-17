@@ -448,7 +448,7 @@ $("body").on("click",function(event){
                         var $imgF = `<img class="p-3" src="https://img.icons8.com/cotton/40/000000/rain--v1.png"/>`
                     }
                     else{
-                        var $imgF = `<img src="https://img.icons8.com/color/40/000000/storm.png"/>`
+                        var $imgF = `<img class="p-3" src="https://img.icons8.com/color/40/000000/storm.png"/>`
                     }
     
     
