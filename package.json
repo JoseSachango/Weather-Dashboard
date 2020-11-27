@@ -1,0 +1,23 @@
+{
+  "name": "Weather-Dashboard-Homework",
+  "version": "1.0.0",
+  "description": "This weather dashboard application displays current weather data for any city that you type in the search tool.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseSachango/Weather-Dashboard-Homework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoseSachango/Weather-Dashboard-Homework/issues"
+  },
+  "homepage": "https://github.com/JoseSachango/Weather-Dashboard-Homework#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
